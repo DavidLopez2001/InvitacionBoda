@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invitación de Boda</title>
+
+<!-- Fuentes -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --primary: #8a9575;
+        --primary-dark: #6f785d;
+        --bg: #f5f5f5;
+        --text-main: #333;
+        --muted: #666;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: var(--bg);
+        color: var(--text-main);
+        scroll-behavior: smooth;
+    }
+
+    main {
+        max-width: 480px;
+        margin: 0 auto;
+        background: #fff;
+    }
+
+    /* Fade general */
+    .fade-section { opacity: 0; transform: translateY(20px); transition: .8s; }
+    .fade-section.in-view { opacity: 1; transform: translateY(0); }
+
+    /* PORTADA */
+    .hero {
+        position: relative;
+        overflow: hidden;
+        border-radius: 0 0 22px 22px;
+        box-shadow: 0 12px 25px rgba(0,0,0,0.18);
+    }
+
+    .hero img {
+        width: 100%;
+        display: block;
+        transform: scale(1.03);
+        transition: transform 8s ease-out;
+    }
+
+    .hero:hover img {
+        transform: scale(1.07);
+    }
+
+    .hero-text {
+        position: absolute;
+        bottom: 40px;
+        width: 100%;
+        text-align: center;
+        color: white;
+        text-shadow: 0 3px 18px rgba(0,0,0,.9);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-names {
+        font-family: 'Great Vibes', cursive;
+        font-size: clamp(55px, 11vw, 80px);
+        font-weight: 400;
+    }
+
+    .hero-subtitle {
+        font-size: 15px;
+        letter-spacing: .28em;
+        text-transform: uppercase;
+        margin-top: 10px;
+        font-weight: 500;
+    }
+
+    .chevron {
+        margin-top: 14px;
+        font-size: 22px;
+        animation: bounce 1.4s infinite;
+    }
+
+    @keyframes bounce {
+        0%,100% { transform: translateY(0); }
+        50% { transform: translateY(6px); }
+    }
+
+    /* Secciones */
+    .section { padding: 32px 22px; }
+
+    .section-card {
+        background: #fff;
+        border-radius: 16px;
+        padding: 26px 22px;
+        text-align: center;
+        box-shadow: 0 6px 18px rgba(0,0,0,.06);
+    }
+
+    .script-title {
+        font-family: 'Great Vibes', cursive;
+        font-size: 42px;
+        margin-bottom: 8px;
+    }
+
+    .section-heading {
+        text-transform: uppercase;
+        letter-spacing: .22em;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    /* Iconos */
+    .section-icon svg {
+        width: 44px;
+        height: 44px;
+        stroke: var(--primary);
+        fill: none;
+        stroke-width: 2;
+    }
+
+    /* Cuenta regresiva */
+    .countdown-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: .18em;
+        margin-bottom: 12px;
+    }
+
+    .countdown {
+        display: flex;
+        justify-content: center;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+    }
+
+    .count-item {
+        background: var(--primary);
+        color: #fff;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        font-size: 11px;
+        text-transform: uppercase;
+    }
+
+    .count-item span {
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .btn {
+        background: var(--primary);
+        color: #fff;
+        padding: 11px 22px;
+        border-radius: 40px;
+        text-decoration: none;
+        font-size: 13px;
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+    /* CALENDARIO */
+    .calendar-box {
+        width: 100%;
+        max-width: 300px;
+        margin: 18px auto;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 8px;
+        font-size: 12px;
+    }
+
+    .calendar-box div {
+        padding: 8px 0;
+        border-radius: 10px;
+        background: #f1f1f1;
+    }
+
+    .day-title {
+        font-weight: 600;
+        background: none !important;
+        color: var(--primary-dark);
+    }
+
+    .marked-day {
+        background: var(--primary)!important;
+        color: #fff!important;
+        font-weight: 700;
+        position: relative;
+    }
+
+    .marked-day svg {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        bottom: -6px;
+        right: -6px;
+        fill: var(--primary-dark);
+        stroke: white;
+        stroke-width: 1.3;
+    }
+
+    /* GALERÍA */
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-top: 10px;
+    }
+
+    .gallery img {
+        width: 100%;
+        aspect-ratio: 1 / 1.22;
+        object-fit: cover;
+        border-radius: 14px;
+
+        opacity: 0;
+        transform: translateY(25px);
+        transition: .9s ease;
+    }
+
+    .gallery img.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    footer {
+        text-align: center;
+        padding: 26px 18px;
+        color: #777;
+        font-size: 12px;
+    }
+
+    /* Ondas tipo Spotify (reproductor) */
+    .bar {
+        width: 4px;
+        background: var(--primary);
+        border-radius: 8px;
+        height: 6px;
+        animation: barAnim 0.7s ease-in-out infinite;
+        transform-origin: bottom;
+    }
+
+    .bar:nth-child(1) { animation-delay: 0s; }
+    .bar:nth-child(2) { animation-delay: 0.1s; }
+    .bar:nth-child(3) { animation-delay: 0.2s; }
+    .bar:nth-child(4) { animation-delay: 0.3s; }
+    .bar:nth-child(5) { animation-delay: 0.4s; }
+    .bar:nth-child(6) { animation-delay: 0.5s; }
+
+    @keyframes barAnim {
+        0%   { height: 4px; }
+        50%  { height: 20px; }
+        100% { height: 4px; }
+    }
+
+    .bar.paused {
+        animation-play-state: paused !important;
+    }
+</style>
+</head>
+
+<body>
+<main>
+
+<!-- PORTADA -->
+<header class="hero">
+    <img src="boda.jpeg" alt="Deisy y David">
+    <div class="hero-text">
+        <div class="hero-names">Deisy & David</div>
+        <div class="hero-subtitle">Nos casamos</div>
+        <div class="chevron">⌄</div>
+    </div>
+</header>
+
+<!-- REPRODUCTOR DE MÚSICA ESTILO 1 -->
+<section class="section fade-section">
+    <div class="section-card" style="padding-top: 5px; padding-bottom: 15px;">
+
+        <div id="music-player-bar" style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 14px;
+            cursor: pointer;
+        ">
+
+            <!-- Ícono Play / Pausa -->
+            <svg id="music-icon" viewBox="0 0 24 24" width="32" height="32" style="color: var(--primary);">
+                <g id="music-shape">
+                    <!-- Play por defecto -->
+                    <polygon points="8,5 19,12 8,19" fill="currentColor"></polygon>
+                </g>
+            </svg>
+
+            <!-- Ondas estilo Spotify (6 barras) -->
+            <div id="sound-bars" style="display: flex; gap: 4px; align-items: flex-end; height: 20px;">
+                <div class="bar paused"></div>
+                <div class="bar paused"></div>
+                <div class="bar paused"></div>
+                <div class="bar paused"></div>
+                <div class="bar paused"></div>
+                <div class="bar paused"></div>
+            </div>
+
+        </div>
+
+        <audio id="music-autoplay" src="musica.mp3"></audio>
+    </div>
+</section>
+
+<!-- MENSAJE PRINCIPAL -->
+<section class="section fade-section">
+    <div class="section-card">
+        <h2 class="script-title">¡Estás invitado!</h2>
+        <p class="section-lead">
+            Nos encantaría que seas parte de este momento tan especial.
+        </p>
+        <p>Acompáñanos a celebrar nuestro amor.</p>
+    </div>
+</section>
+
+<!-- CUENTA REGRESIVA (VERSIÓN CORREGIDA) -->
+<section class="section fade-section">
+    <div class="section-card">
+
+        <!-- FOTO GRANDE reemplazando el icono -->
+        <img src="fotos/foto_calendario.jpeg"
+             alt="Foto calendario"
+             style="
+                width: 100%;
+                max-width: 260px;
+                height: auto;
+                border-radius: 18px;
+                display: block;
+                margin: 0 auto 25px auto;
+             ">
+
+        <!-- ICONO pequeño arriba del texto -->
+        <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 14px;">
+            <svg width="46" height="46" viewBox="0 0 24 24" fill="none"
+                stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                style="margin-bottom: 8px;">
+                <rect x="3" y="5" width="18" height="16" rx="2"></rect>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+                <line x1="8" y1="3" x2="8" y2="7"></line>
+                <line x1="16" y1="3" x2="16" y2="7"></line>
+            </svg>
+
+            <div style="text-align: center; font-size: 13px; letter-spacing: .20em; text-transform: uppercase; line-height: 1.4;">
+                FALTA PARA<br>LA BODA
+            </div>
+        </div>
+
+        <!-- CÍRCULOS DE LA CUENTA REGRESIVA -->
+        <div class="countdown" id="countdown">
+
+            <div class="count-item">
+                <span id="days">0</span>
+                Días
+            </div>
+
+            <div class="count-item">
+                <span id="hours">0</span>
+                Horas
+            </div>
+
+            <div class="count-item">
+                <span id="minutes">0</span>
+                Min
+            </div>
+
+            <div class="count-item">
+                <span id="seconds">0</span>
+                Seg
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- CALENDARIO -->
+<section class="section fade-section">
+    <div class="section-card">
+
+        <div class="section-heading">Enero 2026</div>
+
+        <div class="calendar-box">
+            <div class="day-title">L</div>
+            <div class="day-title">M</div>
+            <div class="day-title">M</div>
+            <div class="day-title">J</div>
+            <div class="day-title">V</div>
+            <div class="day-title">S</div>
+            <div class="day-title">D</div>
+
+            <div></div><div></div><div></div><div>1</div>
+
+            <div class="marked-day">
+                2
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 21s-6-4.35-9-8.28C-1.2 8.4 1.8 3 6.6 3
+                             c2.1 0 3.9 1.2 5.4 3
+                             1.5-1.8 3.3-3 5.4-3
+                             4.8 0 7.8 5.4 3.6 9.72
+                             C18 16.65 12 21 12 21z"/>
+                </svg>
+            </div>
+
+            <div>3</div><div>4</div><div>5</div><div>6</div>
+            <div>7</div><div>8</div><div>9</div><div>10</div>
+            <div>11</div><div>12</div><div>13</div><div>14</div>
+            <div>15</div><div>16</div><div>17</div><div>18</div>
+            <div>19</div><div>20</div><div>21</div><div>22</div>
+            <div>23</div><div>24</div><div>25</div><div>26</div>
+            <div>27</div><div>28</div><div>29</div><div>30</div>
+            <div>31</div>
+        </div>
+
+    </div>
+</section>
+
+<!-- LUGAR DE CELEBRACIÓN -->
+<section class="section fade-section">
+    <div class="section-card">
+
+        <!-- Icono anillos -->
+        <div class="section-icon">
+            <svg viewBox="0 0 64 64">
+                <circle cx="24" cy="34" r="12" stroke-width="2"></circle>
+                <circle cx="40" cy="30" r="12" stroke-width="2"></circle>
+            </svg>
+        </div>
+
+        <div class="section-heading">LUGAR DE CELEBRACIÓN</div>
+
+        <p class="section-lead">Sala Eventos Kairós</p>
+        <p style="margin: 4px 0;">Figueres</p>
+
+        <p>Viernes, 2 de enero de 2026</p>
+        <p>8:00 p.m.</p>
+        <p>Carrer Méndez Núñez, 43, bajo tercero, 17600 Figueres, Girona</p>
+
+        <a 
+            href="https://share.google/ZgMObXrMLwir49LHO" 
+            class="btn" 
+            target="_blank" 
+            rel="noopener noreferrer"
+        >
+            Ver ubicación
+        </a>
+
+    </div>
+</section>
+
+
+<!-- DRESS CODE -->
+<section class="section fade-section">
+    <div class="section-card">
+        <div class="section-icon">
+            <svg viewBox="0 0 64 64">
+                <!-- Traje -->
+                <path d="M10 14 L20 14 L24 30 L18 50 L12 50 L6 30 Z"></path>
+                <!-- Vestido -->
+                <path d="M38 16 L44 16 L48 24 L56 50 L34 50 L42 24 Z"></path>
+            </svg>
+        </div>
+
+        <div class="section-heading">Dress Code</div>
+
+        <p class="section-lead">Formal</p>
+
+        <p style="font-size:14px; color:var(--muted); margin-top:6px;">
+            Hombres en traje y mujeres en vestido.
+        </p>
+
+        <p style="font-size:14px; color:var(--muted); margin-top:6px;">
+            Agradecemos respetuosamente evitar los colores 
+            <strong>blanco</strong>, <strong>gris</strong> y <strong>verde</strong>,
+            para mantener la armonía visual del evento y el significado especial de la ceremonia.
+        </p>
+
+    </div>
+</section>
+
+
+<!-- GALERÍA -->
+<section class="section fade-section">
+    <div class="section-card">
+        <div class="section-heading">Nuestros momentos</div>
+
+        <div class="gallery">
+            <img src="fotos/foto1.jpeg" alt="">
+            <img src="fotos/foto2.jpeg" alt="">
+            <img src="fotos/foto3.jpeg" alt="">
+            <img src="fotos/foto4.jpeg" alt="">
+            <img src="fotos/foto5.jpeg" alt="">
+            <img src="fotos/foto6.jpeg" alt="">
+        </div>
+    </div>
+</section>
+
+<!-- LLUVIA DE SOBRES -->
+<section class="section fade-section">
+    <div class="section-card">
+
+        <div class="section-icon">
+            <svg viewBox="0 0 64 64">
+                <rect x="8" y="16" width="48" height="32" rx="4" style="fill: var(--primary);"></rect>
+                <polyline points="8,16 32,36 56,16" fill="none" stroke="white" stroke-width="3"/>
+                <path d="M32 28 
+                         C28 24, 22 24, 22 30 
+                         C22 35, 28 38, 32 42 
+                         C36 38, 42 35, 42 30 
+                         C42 24, 36 24, 32 28 Z"
+                      fill="white"></path>
+            </svg>
+        </div>
+
+        <div class="section-heading">LLUVIA DE SOBRES</div>
+
+        <p class="section-lead">Su presencia es el regalo más valioso en nuestro día especial,</p>
+        <p style="font-size:14px;">pero sabemos que algunos querrán darnos algo más.</p>
+
+    </div>
+</section>
+
+<!-- CONFIRMACIÓN -->
+<section class="section fade-section">
+    <div class="section-card">
+        <div class="section-icon">
+    <svg viewBox="0 0 64 64" 
+         stroke="var(--primary)" 
+         stroke-width="3" 
+         fill="none" 
+         stroke-linecap="round" 
+         stroke-linejoin="round">
+        <circle cx="32" cy="32" r="20"></circle>
+        <polyline points="22,33 30,41 44,25"></polyline>
+    </svg>
+</div>
+
+        <div class="section-heading">Confirmar asistencia</div>
+        <p>Por favor confirma tu asistencia antes del 15 de diciembre.</p>
+        <p>Esta invitación es válida para ti y tu pareja.</p>
+
+        <a 
+            class="btn"
+            target="_blank"
+            href="https://wa.me/604250460?text=Hola,%20confirmo%20mi%20asistencia%20a%20la%20boda.%20Esta%20invitaci%C3%B3n%20es%20para%20mí%20y%20mi%20pareja.%20Confirmo%20antes%20del%2015%20de%20diciembre."
+        >
+            Confirmar por WhatsApp
+        </a>
+
+    </div>
+</section>
+
+<footer>Con cariño,<br>Deisy & David</footer>
+
+</main>
+
+<script>
+/* Cuenta regresiva */
+const weddingDate = new Date("2026-01-02T20:00:00").getTime();
+setInterval(()=>{
+    const now = Date.now();
+    const diff = weddingDate - now;
+    document.getElementById("days").textContent = Math.floor(diff/(1000*60*60*24));
+    document.getElementById("hours").textContent = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+    document.getElementById("minutes").textContent = Math.floor((diff%(1000*60*60))/(1000*60));
+    document.getElementById("seconds").textContent = Math.floor((diff%(1000*60))/1000);
+},1000);
+
+/* Fade secciones */
+const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+        if(e.isIntersecting){
+            e.target.classList.add("in-view");
+            obs.unobserve(e.target);
+        }
+    });
+},{threshold:.15});
+document.querySelectorAll(".fade-section").forEach(s=>obs.observe(s));
+
+/* GALERÍA: imágenes una por una */
+const imgs = document.querySelectorAll(".gallery img");
+const obs2 = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+        if(e.isIntersecting){
+            e.target.classList.add("visible");
+            obs2.unobserve(e.target);
+        }
+    });
+},{threshold:.25});
+imgs.forEach(i=>obs2.observe(i));
+
+/* Reproductor estilo Spotify */
+const audio = document.getElementById("music-autoplay");
+const barPlayer = document.getElementById("music-player-bar");
+const bars = document.querySelectorAll(".bar");
+const shape = document.getElementById("music-shape");
+
+// icono pausa || (líneas finas)
+function setPauseIcon() {
+    shape.innerHTML = `
+        <rect x="9" y="5" width="3" height="14" rx="1" fill="currentColor"></rect>
+        <rect x="14" y="5" width="3" height="14" rx="1" fill="currentColor"></rect>
+    `;
+}
+
+// icono play ▶
+function setPlayIcon() {
+    shape.innerHTML = `
+        <polygon points="8,5 19,12 8,19" fill="currentColor"></polygon>
+    `;
+}
+
+// autoplay desde el minuto 1
+document.addEventListener("DOMContentLoaded", () => {
+    audio.currentTime = 60;
+
+    audio.play().then(() => {
+        setPauseIcon();
+        bars.forEach(b => b.classList.remove("paused"));
+    }).catch(() => {
+        // si el navegador bloquea autoplay, se quedará pausado hasta que hagan click
+    });
+});
+
+// click para play/pause
+barPlayer.addEventListener("click", () => {
+    if (audio.paused) {
+        // si por alguna razón volvió al inicio, lo llevamos al minuto 1 mínimo
+        if (audio.currentTime < 60) audio.currentTime = 60;
+        audio.play();
+        setPauseIcon();
+        bars.forEach(b => b.classList.remove("paused"));
+    } else {
+        audio.pause();
+        setPlayIcon();
+        bars.forEach(b => b.classList.add("paused"));
+    }
+});
+</script>
+
+</body>
+</html>
