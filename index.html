@@ -276,6 +276,12 @@
     .bar.paused {
         animation-play-state: paused !important;
     }
+
+    /* Flecha “toca para activar la música” */
+    @keyframes bounceArrow {
+        0%, 100% { transform: translateY(0); opacity: 0.7; }
+        50% { transform: translateY(5px); opacity: 1; }
+    }
 </style>
 </head>
 
@@ -324,7 +330,22 @@
 
         </div>
 
-        <audio id="music-autoplay" src="musica.mp3" muted></audio>
+        <!-- Mensaje de sugerencia -->
+        <div style="text-align:center; margin-top:6px;">
+            <span style="font-size:12px; color:var(--muted);">
+                Toca para activar la música
+            </span>
+            <div style="
+                font-size:16px;
+                color:var(--primary);
+                animation:bounceArrow 1.4s infinite;
+                margin-top:4px;
+            ">
+                ↓
+            </div>
+        </div>
+
+        <audio id="music-autoplay" src="musica.mp3" autoplay muted></audio>
     </div>
 </section>
 
@@ -339,7 +360,7 @@
     </div>
 </section>
 
-<!-- CUENTA REGRESIVA (VERSIÓN CORREGIDA) -->
+<!-- CUENTA REGRESIVA -->
 <section class="section fade-section">
     <div class="section-card">
 
@@ -373,32 +394,26 @@
 
         <!-- CÍRCULOS DE LA CUENTA REGRESIVA -->
         <div class="countdown" id="countdown">
-
             <div class="count-item">
                 <span id="days">0</span>
                 Días
             </div>
-
             <div class="count-item">
                 <span id="hours">0</span>
                 Horas
             </div>
-
             <div class="count-item">
                 <span id="minutes">0</span>
                 Min
             </div>
-
             <div class="count-item">
                 <span id="seconds">0</span>
                 Seg
             </div>
-
         </div>
 
     </div>
 </section>
-
 
 <!-- CALENDARIO -->
 <section class="section fade-section">
@@ -445,7 +460,6 @@
 <section class="section fade-section">
     <div class="section-card">
 
-        <!-- Icono anillos -->
         <div class="section-icon">
             <svg viewBox="0 0 64 64">
                 <circle cx="24" cy="34" r="12" stroke-width="2"></circle>
@@ -474,7 +488,6 @@
     </div>
 </section>
 
-
 <!-- DRESS CODE -->
 <section class="section fade-section">
     <div class="section-card">
@@ -492,7 +505,7 @@
         <p class="section-lead">Formal</p>
 
         <p style="font-size:14px; color:var(--muted); margin-top:6px;">
-            Vente con tu mejor look.
+             Vente con tu mejor look.
         </p>
 
         <p style="font-size:14px; color:var(--muted); margin-top:6px;">
@@ -503,7 +516,6 @@
 
     </div>
 </section>
-
 
 <!-- GALERÍA -->
 <section class="section fade-section">
@@ -550,16 +562,16 @@
 <section class="section fade-section">
     <div class="section-card">
         <div class="section-icon">
-    <svg viewBox="0 0 64 64" 
-         stroke="var(--primary)" 
-         stroke-width="3" 
-         fill="none" 
-         stroke-linecap="round" 
-         stroke-linejoin="round">
-        <circle cx="32" cy="32" r="20"></circle>
-        <polyline points="22,33 30,41 44,25"></polyline>
-    </svg>
-</div>
+            <svg viewBox="0 0 64 64" 
+                stroke="var(--primary)" 
+                stroke-width="3" 
+                fill="none" 
+                stroke-linecap="round" 
+                stroke-linejoin="round">
+                <circle cx="32" cy="32" r="20"></circle>
+                <polyline points="22,33 30,41 44,25"></polyline>
+            </svg>
+        </div>
 
         <div class="section-heading">Confirmar asistencia</div>
         <p>Por favor confirma tu asistencia antes del 15 de diciembre.</p>
@@ -634,17 +646,17 @@ function setPlayIcon() {
     `;
 }
 
-/* AUTOPLAY compatible con GitHub Pages */
+/* AUTOPLAY silencioso (hasta donde el navegador permita) */
 document.addEventListener("DOMContentLoaded", () => {
-    audio.currentTime = 60;
+    audio.currentTime = 17;   // minuto 1
+    audio.muted = true;       // necesario para permitir autoplay en algunos navegadores
 
     audio.play().then(() => {
-        // autoplay silencioso permitido
-        setPauseIcon();
-        bars.forEach(b => b.classList.remove("paused"));
+        // si el autoplay muted se permite, dejamos icono en play y barras pausadas
+        setPlayIcon();
+        bars.forEach(b => b.classList.add("paused"));
     }).catch(() => {
-        // navegador bloqueó autoplay → el usuario tendrá que tocar
-        audio.pause();
+        // si ni siquiera muted autoplay se permite, no pasa nada, ya se activará con click
         setPlayIcon();
         bars.forEach(b => b.classList.add("paused"));
     });
@@ -654,10 +666,18 @@ document.addEventListener("DOMContentLoaded", () => {
 barPlayer.addEventListener("click", () => {
 
     // activar sonido si estaba silenciado por autoplay
-    if (audio.muted) audio.muted = false;
+    if (audio.muted) {
+        audio.muted = false;
+        if (audio.currentTime < 17) audio.currentTime = 17;
+        audio.play();
+        setPauseIcon();
+        bars.forEach(b => b.classList.remove("paused"));
+        return;
+    }
 
+    // Alternar play/pause normal
     if (audio.paused) {
-        if (audio.currentTime < 60) audio.currentTime = 60;
+        if (audio.currentTime < 17) audio.currentTime = 17;
         audio.play();
         setPauseIcon();
         bars.forEach(b => b.classList.remove("paused"));
@@ -669,9 +689,5 @@ barPlayer.addEventListener("click", () => {
 });
 </script>
 
-
 </body>
 </html>
-
-
-
