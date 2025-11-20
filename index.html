@@ -603,7 +603,7 @@ const obs = new IntersectionObserver((entries)=>{
 },{threshold:.15});
 document.querySelectorAll(".fade-section").forEach(s=>obs.observe(s));
 
-/* GALERÍA: imágenes una por una */
+/* GALERÍA */
 const imgs = document.querySelectorAll(".gallery img");
 const obs2 = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{
@@ -615,75 +615,48 @@ const obs2 = new IntersectionObserver((entries)=>{
 },{threshold:.25});
 imgs.forEach(i=>obs2.observe(i));
 
-/* Reproductor estilo Spotify */
+/* === REPRODUCTOR DE MÚSICA === */
 const audio = document.getElementById("music-autoplay");
 const barPlayer = document.getElementById("music-player-bar");
 const bars = document.querySelectorAll(".bar");
-const shape = document.getElementById("music-shape");
+let shape = document.getElementById("music-shape");
 
-// icono pausa || (líneas finas)
+/* Íconos */
 function setPauseIcon() {
     shape.innerHTML = `
         <rect x="9" y="5" width="3" height="14" rx="1" fill="currentColor"></rect>
         <rect x="14" y="5" width="3" height="14" rx="1" fill="currentColor"></rect>
     `;
 }
-
-// icono play ▶
 function setPlayIcon() {
     shape.innerHTML = `
         <polygon points="8,5 19,12 8,19" fill="currentColor"></polygon>
     `;
 }
 
-// autoplay desde el minuto 1
+/* AUTOPLAY compatible con GitHub Pages */
 document.addEventListener("DOMContentLoaded", () => {
     audio.currentTime = 60;
 
     audio.play().then(() => {
+        // autoplay silencioso permitido
         setPauseIcon();
         bars.forEach(b => b.classList.remove("paused"));
     }).catch(() => {
-        // si el navegador bloquea autoplay, se quedará pausado hasta que hagan click
-    });
-});
-
-// --- AUTOPLAY COMPATIBLE CON GITHUB PAGES ---
-document.addEventListener("DOMContentLoaded", () => {
-
-    // comenzar en minuto 1
-    audio.currentTime = 60;
-
-    // intentar autoplay silencioso
-    audio.play().then(() => {
-        setPauseIcon();
-        bars.forEach(b => b.classList.remove("paused"));
-    }).catch(() => {
-        // Si falla, esperará a un click
-    });
-});
-
-// Primer click → activar sonido real
-barPlayer.addEventListener("click", () => {
-    if (audio.muted) {
-        audio.muted = false;
-    }
-
-    if (audio.paused) {
-        audio.play();
-        setPauseIcon();
-        bars.forEach(b => b.classList.remove("paused"));
-    } else {
+        // navegador bloqueó autoplay → el usuario tendrá que tocar
         audio.pause();
         setPlayIcon();
         bars.forEach(b => b.classList.add("paused"));
-    }
+    });
 });
 
-// click para play/pause
+/* CLICK: activar sonido real + play/pause */
 barPlayer.addEventListener("click", () => {
+
+    // activar sonido si estaba silenciado por autoplay
+    if (audio.muted) audio.muted = false;
+
     if (audio.paused) {
-        // si por alguna razón volvió al inicio, lo llevamos al minuto 1 mínimo
         if (audio.currentTime < 60) audio.currentTime = 60;
         audio.play();
         setPauseIcon();
@@ -696,6 +669,8 @@ barPlayer.addEventListener("click", () => {
 });
 </script>
 
+
 </body>
 </html>
+
 
