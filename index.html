@@ -324,7 +324,7 @@
 
         </div>
 
-        <audio id="music-autoplay" src="musica.mp3"></audio>
+        <audio id="music-autoplay" src="musica.mp3" muted></audio>
     </div>
 </section>
 
@@ -648,6 +648,38 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+// --- AUTOPLAY COMPATIBLE CON GITHUB PAGES ---
+document.addEventListener("DOMContentLoaded", () => {
+
+    // comenzar en minuto 1
+    audio.currentTime = 60;
+
+    // intentar autoplay silencioso
+    audio.play().then(() => {
+        setPauseIcon();
+        bars.forEach(b => b.classList.remove("paused"));
+    }).catch(() => {
+        // Si falla, esperará a un click
+    });
+});
+
+// Primer click → activar sonido real
+barPlayer.addEventListener("click", () => {
+    if (audio.muted) {
+        audio.muted = false;
+    }
+
+    if (audio.paused) {
+        audio.play();
+        setPauseIcon();
+        bars.forEach(b => b.classList.remove("paused"));
+    } else {
+        audio.pause();
+        setPlayIcon();
+        bars.forEach(b => b.classList.add("paused"));
+    }
+});
+
 // click para play/pause
 barPlayer.addEventListener("click", () => {
     if (audio.paused) {
@@ -666,3 +698,4 @@ barPlayer.addEventListener("click", () => {
 
 </body>
 </html>
+
