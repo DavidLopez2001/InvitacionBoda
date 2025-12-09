@@ -526,7 +526,7 @@
         <div id="dress-padrinos" style="margin-top:16px; font-size:14px; display:none;">
             <p><strong>Padrinos (civil y católica):</strong></p>
             <p>
-                • Hombres: camisa <strong>lila</strong>, pantalón <strong>beige</strong> y zapatos <strong>negros</strong>.<br>
+                • Hombres: camisa <strong>blanca</strong>, traje <strong>gris</strong> y corbata <strong>lila</strong>.<br>
                 • Mujeres: vestido <strong>lila</strong>.
             </p>
 
@@ -552,8 +552,8 @@
                     width: 120px;
                     height: 70px;
                     border-radius: 12px;
-                    background: #E6D8AD;
-                    border: 2px solid #f1e6c7;
+                    background: #CFCFCF; /* Gris */
+                    border: 2px solid #e5e5e5;
                     display:flex;
                     flex-direction:column;
                     align-items:center;
@@ -562,7 +562,7 @@
                     font-weight:600;
                     color:#333;
                 ">
-                    Beige<br>
+                    Gris<br>
                 </div>
             </div>
 
@@ -630,8 +630,12 @@
         </div>
 
         <div class="section-heading">Confirmar asistencia</div>
+
         <p>Por favor confirma tu asistencia antes del 15 de diciembre.</p>
-        <p id="valid-for-text">Esta invitación es válida para ti y tu acompañante.</p>
+
+        <!-- NUEVO TEXTO QUE AGREGAS -->
+        <p id="valid-for-names" style="font-weight:600;"></p>
+
 
         <a 
             class="btn"
@@ -645,6 +649,7 @@
     </div>
 </section>
 
+
 <footer>Con cariño,<br>Deisy & David</footer>
 
 </main>
@@ -654,32 +659,129 @@
 const INVITADOS = {
     "PADRES_DEISY": {
         nombre: "Myriam y Magnner",
-        titulo: "¡Queridos Papás!",
+        titulo: "¡Queridos Papás y suegros!",
         personas: 2,
         textoLinea: "Nos hace mucha ilusión compartir este día tan especial con ustedes."
     },
-    "PRIMO_ESTEBAN": {
-        nombre: "Esteban y Dayana",
-        titulo: "¡Esteban y Dayana!",
+    "PADRES_DAVID": {
+        nombre: "Yeimy, Juan y Pipe",
+        titulo: "¡Queridos Papás y suegros y hermanito!",
+        personas: 3,
+        textoLinea: "Nos hace mucha ilusión compartir este día tan especial con ustedes, aunque sea en la distancia."
+    },
+    "FAMILIA_ESTEBAN": {
+        nombre: "Esteban, Majo y Dayana",
+        titulo: "¡Querida familia!",
+        personas: 3,
+        textoLinea: "Nos encantaría que nos acompañen en este día tan especial."
+    },
+    "FAMILIA_YOHANA": {
+        nombre: "Yohana, Ashley y Edgard",
+        titulo: "¡Querida familia!",
+        personas: 3,
+        textoLinea: "Nos encantaría que nos acompañen en este día tan especial."
+    },
+    "FAMILIA_GUILLERMO": {
+        nombre: "Guille, Laura, Jordi, Acier, Yeicon",
+        titulo: "¡Querida familia!",
+        personas: 5,
+        textoLinea: "Nos encantaría que nos acompañen en este día tan especial."
+    },
+
+    "FAMILIA_ALEJA": {
+        nombre: "Aleja, Camilo",
+        titulo: "¡Querida familia!",
         personas: 2,
         textoLinea: "Nos encantaría que nos acompañen en este día tan especial."
     },
-    "PADRINOS_CIVIL": {
-        nombre: "Celeste y Acier",
-        titulo: "¡Padrinos de la Ceremonia Civil!",
+    "JUANDA ": {
+        nombre: "Juan David",
+        titulo: "¡Querida familia!",
+        personas: 1,
+        textoLinea: "Nos encantaría que nos acompañen en este día tan especial."
+    },
+    "MAFE ": {
+        nombre: "Mafe",
+        titulo: "¡Querida familia!",
+        personas: 1,
+        textoLinea: "Nos encantaría que nos acompañen en este día tan especial."
+    },
+    "PADRINOS_ASIER": {
+        nombre: "Celeste y Asier",
+        titulo: "¡Padrinos!",
         personas: 2,
-        textoLinea: "Gracias por acompañarnos en este paso tan importante.",
-        extraEspecial: "<br><br>Agradecemos profundamente su presencia y cariño en este día tan significativo.",
+        textoLinea: "Hoy inicia una nueva etapa para nosotros, y es un honor saber que contamos con ustedes.De todo corazón, gracias por estar, por sumar y por hacer este día aún más especial.",
+        extraEspecial: "<br><br>Gracias por ser parte de uno de los días más importantes de nuestras vidas. Su cariño, apoyo y compañía han significado mucho para nosotros, no solo hoy, sino en cada etapa que hemos compartido juntos.",
         esPadrino: true
     },
-    "PADRINOS_CATOLICA": {
+    "PADRINOS_CAMILO": {
         nombre: "Camilo y Valentina",
-        titulo: "¡Padrinos de la Ceremonia Católica!",
+        titulo: "¡Padrinos!",
         personas: 2,
-        textoLinea: "Nos sentimos honrados de que formen parte de este momento tan especial.",
-        extraEspecial: "<br><br>Agradecemos de corazón su acompañamiento, apoyo y cariño.",
+        textoLinea: "Hoy inicia una nueva etapa para nosotros, y es un honor saber que contamos con ustedes.De todo corazón, gracias por estar, por sumar y por hacer este día aún más especial.",
+        extraEspecial: "<br><br>Gracias por ser parte de uno de los días más importantes de nuestras vidas. Su cariño, apoyo y compañía han significado mucho para nosotros, no solo hoy, sino en cada etapa que hemos compartido juntos.",
         esPadrino: true
+    },
+    "FAMILIA_ROBINSON": {
+    nombre: "Tío Robinson, Tía Angélica, Primo Robinson, Maicol, Tatiana y Mariana",
+    titulo: "¡Familia Robinson!",
+    personas: 6,
+    textoLinea: "Nos encantaría contar con toda la familia en este día tan especial."
+    },
+    "FAMILIA_SHIRLEY": {
+        nombre: "Tía Shirley, Tío Habinson y Joseph",
+        titulo: "¡Familia de Tía Shirley!",
+        personas: 3,
+        textoLinea: "Nos alegraría muchísimo que nos acompañen en este momento tan especial."
+    },
+
+    "FAMILIA_KIMBER": {
+        nombre: "Kimber, Camilo, Dana y Jorji",
+        titulo: "¡Familia de Kimber!",
+        personas: 4,
+        textoLinea: "Será un honor compartir este día con ustedes."
+    },
+
+    "FAMILIA_JAIR": {
+        nombre: "Tío Jair, Diana, Maicol, Sharit y Karol",
+        titulo: "¡Familia de Tío Jair!",
+        personas: 5,
+        textoLinea: "Nos encantaría celebrar este día tan especial junto a ustedes."
+    },
+
+    "FAMILIA_RICHARD": {
+        nombre: "Tío Richard, Julieth y Meiber",
+        titulo: "¡Familia de Tío Richard!",
+        personas: 3,
+        textoLinea: "Nos haría muy felices contar con su presencia."
+    },
+
+    "FAMILIA_RONALD": {
+        nombre: "Tío Ronald, Tía Angie, Brandon, Niyi y Carito",
+        titulo: "¡Familia de Tío Ronald!",
+        personas: 5,
+        textoLinea: "Será muy especial para nosotros que nos acompañen en este día."
+    },
+
+    "FAMILIA_JORXY": {
+        nombre: "Tío Jorxy y Nico",
+        titulo: "¡Familia de Tío Jorxy!",
+        personas: 2,
+        textoLinea: "Nos alegraría contar con su compañía en este día tan especial."
+    },
+    "ISAIAS": {
+    nombre: "Isaías",
+    titulo: "¡Isaías!",
+    personas: 1,
+    textoLinea: "Nos encantaría que nos acompañes en este día tan especial."
+    },
+    "JAMPIER": {
+        nombre: "Don Fabierson",
+        titulo: "¡Jampier!",
+        personas: 1,
+        textoLinea: "Nuestro estimado Fabierson jampier, Nos encantaría que nos acompañes en este día tan especial."
     }
+
 };
 
 const params = new URLSearchParams(window.location.search);
@@ -690,7 +792,6 @@ const titleEl = document.getElementById("invitation-title");
 const guestLineEl = document.getElementById("guest-line");
 const guestExtraEl = document.getElementById("guest-extra-text");
 const guestNameEl = document.getElementById("guest-name");
-const validForEl = document.getElementById("valid-for-text");
 const btnWhatsApp = document.getElementById("btn-whatsapp");
 const dressPadrinosEl = document.getElementById("dress-padrinos");
 const dressGeneralEl = document.getElementById("dress-general");
@@ -712,6 +813,10 @@ titleEl.textContent = invitado.titulo;
 guestLineEl.textContent = invitado.textoLinea;
 guestNameEl.textContent = `Para: ${invitado.nombre}`;
 
+// Mostrar a quién es válida la invitación
+const validForNamesEl = document.getElementById("valid-for-names");
+validForNamesEl.textContent = `Esta invitación es válida para: ${invitado.nombre}`;
+
 if (invitado.extraEspecial) {
     guestExtraEl.innerHTML = invitado.extraEspecial;
 } else {
@@ -727,14 +832,6 @@ if (invitado.esPadrino) {
     if (dressGeneralEl) dressGeneralEl.style.display = "block";
 }
 
-/* Texto de cuántas personas */
-if (invitado.personas === 1) {
-    validForEl.textContent = "Esta invitación es válida solo para ti.";
-} else if (invitado.personas === 2) {
-    validForEl.textContent = "Esta invitación es válida para ti y tu acompañante.";
-} else {
-    validForEl.textContent = `Esta invitación es válida para un total de ${invitado.personas} personas.`;
-}
 
 /* WhatsApp dinámico */
 const mensajeWhatsApp =
