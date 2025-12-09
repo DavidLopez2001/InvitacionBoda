@@ -137,17 +137,6 @@
     }
 
     /* Cuenta regresiva */
-    .countdown-title {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-        font-size: 14px;
-        text-transform: uppercase;
-        letter-spacing: .18em;
-        margin-bottom: 12px;
-    }
-
     .countdown {
         display: flex;
         justify-content: center;
@@ -283,7 +272,6 @@
         animation-play-state: paused !important;
     }
 
-    /* Flecha “toca para activar la música” */
     @keyframes bounceArrow {
         0%, 100% { transform: translateY(0); opacity: 0.7; }
         50% { transform: translateY(5px); opacity: 1; }
@@ -304,7 +292,7 @@
     </div>
 </header>
 
-<!-- REPRODUCTOR DE MÚSICA ESTILO 1 -->
+<!-- REPRODUCTOR DE MÚSICA -->
 <section class="section fade-section">
     <div class="section-card" style="padding-top: 5px; padding-bottom: 15px;">
 
@@ -315,16 +303,12 @@
             gap: 14px;
             cursor: pointer;
         ">
-
-            <!-- Ícono Play / Pausa -->
             <svg id="music-icon" viewBox="0 0 24 24" width="32" height="32" style="color: var(--primary);">
                 <g id="music-shape">
-                    <!-- Play por defecto -->
                     <polygon points="8,5 19,12 8,19" fill="currentColor"></polygon>
                 </g>
             </svg>
 
-            <!-- Ondas estilo Spotify (6 barras) -->
             <div id="sound-bars" style="display: flex; gap: 4px; align-items: flex-end; height: 20px;">
                 <div class="bar paused"></div>
                 <div class="bar paused"></div>
@@ -333,10 +317,8 @@
                 <div class="bar paused"></div>
                 <div class="bar paused"></div>
             </div>
-
         </div>
 
-        <!-- Mensaje de sugerencia -->
         <div style="text-align:center; margin-top:6px;">
             <span style="font-size:12px; color:var(--muted);">
                 Toca para activar la música
@@ -355,7 +337,7 @@
     </div>
 </section>
 
-<!-- MENSAJE PRINCIPAL (DINÁMICO) -->
+<!-- MENSAJE PRINCIPAL -->
 <section class="section fade-section">
     <div class="section-card">
         <h2 class="script-title" id="invitation-title">¡Estás invitado!</h2>
@@ -373,7 +355,6 @@
 <section class="section fade-section">
     <div class="section-card">
 
-        <!-- FOTO GRANDE reemplazando el icono -->
         <img src="fotos/foto_calendario.jpeg"
              alt="Foto calendario"
              style="
@@ -385,7 +366,6 @@
                 margin: 0 auto 25px auto;
              ">
 
-        <!-- ICONO pequeño arriba del texto -->
         <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 14px;">
             <svg width="46" height="46" viewBox="0 0 24 24" fill="none"
                 stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
@@ -401,7 +381,6 @@
             </div>
         </div>
 
-        <!-- CÍRCULOS DE LA CUENTA REGRESIVA -->
         <div class="countdown" id="countdown">
             <div class="count-item">
                 <span id="days">0</span>
@@ -465,7 +444,7 @@
     </div>
 </section>
 
-<!-- LUGAR DE CELEBRACIÓN -->
+<!-- LUGAR -->
 <section class="section fade-section">
     <div class="section-card">
 
@@ -482,7 +461,7 @@
         <p style="margin: 4px 0;">Figueres</p>
 
         <p>Viernes, 2 de enero de 2026</p>
-        <p>8:00 p.m.</p>
+        <p>7:00 p.m.</p>
         <p>Carrer Méndez Núñez, 43, bajo tercero, 17600 Figueres, Girona</p>
 
         <a 
@@ -502,32 +481,45 @@
     <div class="section-card">
         <div class="section-icon">
             <svg viewBox="0 0 64 64">
-                <!-- Traje -->
                 <path d="M10 14 L20 14 L24 30 L18 50 L12 50 L6 30 Z"></path>
-                <!-- Vestido -->
                 <path d="M38 16 L44 16 L48 24 L56 50 L34 50 L42 24 Z"></path>
             </svg>
         </div>
 
         <div class="section-heading">Dress Code</div>
 
-        <!-- Bloque general (todos lo ven) -->
-        <div id="dress-general">
+        <!-- Bloque general (NO padrinos) -->
+        <div id="dress-general" style="margin-top:16px; font-size:14px;">
             <p class="section-lead">Formal</p>
 
             <p style="font-size:14px; color:var(--muted); margin-top:6px;">
                 Agradecemos respetuosamente evitar los colores 
-                <strong>blanco</strong> y <strong>azul</strong>.
+                <strong>blanco</strong>, <strong>lila</strong> y <strong>azul</strong>.
             </p>
 
-            <p style="margin-top:12px; font-size:14px;">
-                Color sugerido para los invitados:
+            <p>
+                • Hombres: camisa <strong>verde menta</strong> y pantalón <strong>negro</strong>.<br>
+                • Mujeres: vestido <strong>verde menta</strong>.
             </p>
 
-            <!-- Imagen de ejemplo de color -->
-            <img src="fotos/ejemplo_color_invitados.jpeg" 
-                 alt="Color recomendado para los invitados"
-                 style="max-width:220px; width:100%; border-radius:12px; margin-top:10px;">
+            <div style="
+                margin-top:16px;
+                width: 160px;
+                height: 80px;
+                border-radius: 12px;
+                background: #ADEBB3;
+                border: 2px solid #d7e9d9;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                font-size:14px;
+                font-weight:600;
+                color:#333;
+                margin-left:auto;
+                margin-right:auto;
+            ">
+                Verde Menta<br>#ADEBB3
+            </div>
         </div>
 
         <!-- Bloque solo para padrinos -->
@@ -537,6 +529,43 @@
                 • Hombres: camisa <strong>lila</strong>, pantalón <strong>beige</strong> y zapatos <strong>negros</strong>.<br>
                 • Mujeres: vestido <strong>lila</strong>.
             </p>
+
+            <div style="display:flex; gap:16px; margin-top:16px; justify-content:center; flex-wrap:wrap;">
+                <div style="
+                    width: 120px;
+                    height: 70px;
+                    border-radius: 12px;
+                    background: #C8A2C8;
+                    border: 2px solid #e6d4e6;
+                    display:flex;
+                    flex-direction:column;
+                    align-items:center;
+                    justify-content:center;
+                    font-size:13px;
+                    font-weight:600;
+                    color:#333;
+                ">
+                    Lila<br>#C8A2C8
+                </div>
+
+                <div style="
+                    width: 120px;
+                    height: 70px;
+                    border-radius: 12px;
+                    background: #E6D8AD;
+                    border: 2px solid #f1e6c7;
+                    display:flex;
+                    flex-direction:column;
+                    align-items:center;
+                    justify-content:center;
+                    font-size:13px;
+                    font-weight:600;
+                    color:#333;
+                ">
+                    Beige<br>#E6D8AD
+                </div>
+            </div>
+
             <p style="margin-top:8px;">
                 Gracias por ser parte esencial de este día tan especial.
             </p>
@@ -621,7 +650,7 @@
 </main>
 
 <script>
-/* === CONFIGURACIÓN DE INVITADOS POR CÓDIGO === */
+/* INVITADOS */
 const INVITADOS = {
     "PADRES_DEISY": {
         nombre: "Myriam y Magnner",
@@ -629,15 +658,12 @@ const INVITADOS = {
         personas: 2,
         textoLinea: "Nos hace mucha ilusión compartir este día tan especial con ustedes."
     },
-
     "PRIMO_ESTEBAN": {
         nombre: "Esteban y Dayana",
         titulo: "¡Esteban y Dayana!",
         personas: 2,
         textoLinea: "Nos encantaría que nos acompañen en este día tan especial."
     },
-
-    // Padrinos para ceremonia civil
     "PADRINOS_CIVIL": {
         nombre: "Celeste y Acier",
         titulo: "¡Padrinos de la Ceremonia Civil!",
@@ -646,8 +672,6 @@ const INVITADOS = {
         extraEspecial: "<br><br>Agradecemos profundamente su presencia y cariño en este día tan significativo.",
         esPadrino: true
     },
-
-    // Padrinos para ceremonia católica
     "PADRINOS_CATOLICA": {
         nombre: "Camilo y Valentina",
         titulo: "¡Padrinos de la Ceremonia Católica!",
@@ -658,11 +682,10 @@ const INVITADOS = {
     }
 };
 
-/* === LEER CÓDIGO DE LA URL === */
 const params = new URLSearchParams(window.location.search);
 const code = params.get("code");
 
-/* === ELEMENTOS DEL DOM === */
+/* ELEMENTOS */
 const titleEl = document.getElementById("invitation-title");
 const guestLineEl = document.getElementById("guest-line");
 const guestExtraEl = document.getElementById("guest-extra-text");
@@ -670,6 +693,7 @@ const guestNameEl = document.getElementById("guest-name");
 const validForEl = document.getElementById("valid-for-text");
 const btnWhatsApp = document.getElementById("btn-whatsapp");
 const dressPadrinosEl = document.getElementById("dress-padrinos");
+const dressGeneralEl = document.getElementById("dress-general");
 
 /* Invitado por defecto */
 let invitado = {
@@ -694,9 +718,13 @@ if (invitado.extraEspecial) {
     guestExtraEl.textContent = "Acompáñanos a celebrar nuestro amor.";
 }
 
-/* Mostrar vestimenta padrinos solo cuando toque */
-if (invitado.esPadrino && dressPadrinosEl) {
-    dressPadrinosEl.style.display = "block";
+/* Vestimenta */
+if (invitado.esPadrino) {
+    if (dressPadrinosEl) dressPadrinosEl.style.display = "block";
+    if (dressGeneralEl) dressGeneralEl.style.display = "none";
+} else {
+    if (dressPadrinosEl) dressPadrinosEl.style.display = "none";
+    if (dressGeneralEl) dressGeneralEl.style.display = "block";
 }
 
 /* Texto de cuántas personas */
@@ -748,13 +776,12 @@ const obs2 = new IntersectionObserver((entries)=>{
 },{threshold:.25});
 imgs.forEach(i=>obs2.observe(i));
 
-/* === REPRODUCTOR DE MÚSICA === */
+/* REPRODUCTOR DE MÚSICA */
 const audio = document.getElementById("music-autoplay");
 const barPlayer = document.getElementById("music-player-bar");
 const bars = document.querySelectorAll(".bar");
 let shape = document.getElementById("music-shape");
 
-/* Íconos */
 function setPauseIcon() {
     shape.innerHTML = `
         <rect x="9" y="5" width="3" height="14" rx="1" fill="currentColor"></rect>
@@ -767,10 +794,9 @@ function setPlayIcon() {
     `;
 }
 
-/* AUTOPLAY silencioso (hasta donde el navegador permita) */
 document.addEventListener("DOMContentLoaded", () => {
-    audio.currentTime = 17;   // segundo 17 aprox
-    audio.muted = true;       // necesario para permitir autoplay en algunos navegadores
+    audio.currentTime = 17;
+    audio.muted = true;
 
     audio.play().then(() => {
         setPlayIcon();
@@ -781,10 +807,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-/* CLICK: activar sonido real + play/pause */
 barPlayer.addEventListener("click", () => {
-
-    // activar sonido si estaba silenciado por autoplay
     if (audio.muted) {
         audio.muted = false;
         if (audio.currentTime < 17) audio.currentTime = 17;
@@ -794,7 +817,6 @@ barPlayer.addEventListener("click", () => {
         return;
     }
 
-    // Alternar play/pause normal
     if (audio.paused) {
         if (audio.currentTime < 17) audio.currentTime = 17;
         audio.play();
